@@ -21,7 +21,8 @@ router.post('/', (req, res, next) => {
     content: req.body.content,
     rating: req.body.rating,
     userId: req.body.userId, 
-    image: req.body.image.uri
+    image: req.body.image.uri,
+    locationId: req.body.locationId
   })
   .then(post => res.json(post))
   .catch(next)

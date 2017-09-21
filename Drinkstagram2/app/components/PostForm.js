@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, Picker} from 'react-native'
 import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, fetchLocations, setCurrentLocation} from '../store'
 import ImagePicker from 'react-native-image-picker';
+import Google from './Google'
 
 class PostForm extends Component{
     constructor() {
@@ -72,26 +73,16 @@ class PostForm extends Component{
             <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)} style={styles.buttonContainer}>
                 <Text>Select Photo</Text>
                 </TouchableOpacity>
-            <TouchableOpacity onPress={this.post} style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Post</Text>
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Google'})} style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>Select a Bar</Text>
             </TouchableOpacity>
-            <Picker
-                selectedValue={this.props.currentLocation}
-                onValueChange={(itemValue, itemIndex) => this.props.setCurrentLocation(itemValue)}> 
-                 {this.props.locations.map(location => (<Picker.Item label={location.name} value={location.name} key={location.id}/>))} 
-                
-             </Picker> 
         </View>
+        
     </View>
     )
   }
 
-  login() {
-    this.props.loginUser(this.props.userText, this.props.passwordText)
-    this.props.navigator.push({
-        id: 'Memberarea'
-    })
-  }
+ 
 }
 
 const mapState = (state) => {

@@ -26,9 +26,6 @@ class News extends Component{
             
         <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Post Something!</Text>
-        <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Google'})} style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Google</Text>
-        </TouchableOpacity>
         </TouchableOpacity>
             {this.props.posts.map(post => (
                 <View key={post.id}>

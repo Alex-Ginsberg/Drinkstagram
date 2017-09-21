@@ -1,13 +1,40 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { View, Image, Text } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {postPost, postLocation} from '../store'
 
 const homePlace = { description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
 const workPlace = { description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
 
-export default GooglePlacesInput = () => {
-  return (
+class GooglePlacesInput extends Component{
+    constructor() {
+        super()
+        this.post = this.post.bind(this)
+    }
+
+    post(data, details) {
+        let locationExists = false
+        let currentLocation
+        for (var i = 0; i < this.props.locations.length; i++) {
+            if (data.id === this.props.locations[i].googleId) {         // If the bar already exists in the database
+                locationExists = true
+                currentLocation = this.props.locations[i].id
+            }
+        }
+        if (locationExists) {
+            this.props.sendPost(this.props.currentContent, this.props.currentRating, this.props.user.id, this.props.image, currentLocation)
+        }
+
+        else {
+            this.props.createLocation(data, details, this.props.currentContent, this.props.currentRating, this.props.user.id, this.props.image)
+            // this.post(data, details)
+        }
+    }
+  
+  render(){
+    return (
     <GooglePlacesAutocomplete
       placeholder='Search'
       minLength={2} // minimum length of text to search
@@ -16,11 +43,7 @@ export default GooglePlacesInput = () => {
       listViewDisplayed='auto'    // true/false/undefined
       fetchDetails={true}
       renderDescription={(row) => row.description} // custom description render
-      onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-        console.log(data);
-        console.log(details);
-        axios.post('http://172.16.23.37:3000/locations', {data, details})
-      }}
+      onPress={(data, details = null) => {this.post(data, details)}}
       getDefaultValue={() => {
         return ''; // text input default value
       }}
@@ -52,7 +75,7 @@ export default GooglePlacesInput = () => {
       }}
 
       filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
-      predefinedPlaces={}
+      predefinedPlaces={[]}
 
       debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
       renderLeftButton={() => <Text>Left</Text>}
@@ -60,3 +83,36 @@ export default GooglePlacesInput = () => {
     />
   );
 }
+}
+
+const mapState = (state) => {
+    return {
+        user: state.user,
+        posts: state.posts,
+        currentRating: state.currentRating,
+        currentContent: state.currentContent,
+        image: state.image,
+        locations: state.locations
+    }
+}
+
+const mapDispatch = (dispatch) => {
+    return {
+        submitNewLocation() {
+            // check if location exists, if so, make post with that location id
+            
+        },
+        submitPost() {
+            // if location doesnt exist, make it, make post with that location id
+
+        },
+        sendPost(content, rating, userId, image, location) {
+            dispatch(postPost(content, rating, userId, image, location))
+        },
+        createLocation(data, details, content, rating, userId, image) {
+            dispatch(postLocation(data, details, content, rating, userId, image))
+        }
+    }
+}
+
+export default connect(mapState, mapDispatch)(GooglePlacesInput)
