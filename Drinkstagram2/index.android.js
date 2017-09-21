@@ -6,6 +6,8 @@ import Signup from './app/components/Signup'
 import News from './app/components/News'
 import PostForm from './app/components/PostForm'
 import Google from './app/components/Google'
+import Bars from './app/components/Bars'
+import SelectedBar from './app/components/SelectedBar'
 import NavigationExperimental from 'react-native-deprecated-custom-components';
 const Navigator = NavigationExperimental.Navigator
 import {Provider} from 'react-redux'
@@ -40,7 +42,9 @@ export default class Drinkstagram2 extends Component{
       case 'PostForm':
         return(<PostForm navigator = {navigator} />)
       case 'Google':
-      return(<Google navigator = {navigator} />)
+        return(<Google navigator = {navigator} />)
+      case 'SelectedBar':
+        return(<SelectedBar navigator = {navigator} />)
     }
   }
 }

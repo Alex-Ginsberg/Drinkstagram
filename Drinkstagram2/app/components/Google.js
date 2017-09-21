@@ -5,9 +5,6 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {postPost, postLocation} from '../store'
 
-const homePlace = { description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
-const workPlace = { description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
-
 class GooglePlacesInput extends Component{
     constructor() {
         super()
@@ -25,11 +22,12 @@ class GooglePlacesInput extends Component{
         }
         if (locationExists) {
             this.props.sendPost(this.props.currentContent, this.props.currentRating, this.props.user.id, this.props.image, currentLocation)
+            this.props.navigator.push({id: 'News'})
         }
 
         else {
             this.props.createLocation(data, details, this.props.currentContent, this.props.currentRating, this.props.user.id, this.props.image)
-            // this.post(data, details)
+            this.props.navigator.push({id: 'News'})
         }
     }
   
