@@ -24,7 +24,7 @@ class SelectedBar extends Component{
           <View style={{height: 50, backgroundColor: 'powderblue'}}><Text>Drinkstagram</Text></View>
             <Text>{this.props.selectedBar.name}</Text>
             <ScrollView>
-            {filteredPosts.map(post => (
+            {filteredPosts.slice(0).reverse().map(post => (
                 <View key={post.id}>
                 <Text>{post.user.username}</Text>
                 <Image source={{uri: post.user.profilePic}} style={{width: 100, height: 50}}/>

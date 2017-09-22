@@ -40,7 +40,7 @@ class Memberarea extends Component{
             <Text></Text>
             <Text></Text>
             <ScrollView>
-            {filteredPosts.map(post => (
+            {filteredPosts.slice(0).reverse().map(post => (
                 <View key={post.id}>
                     <Image source={{uri: post.image}} style={{width: 200, height: 108, borderRadius: 10}}/>
                     <Text>{post.content}</Text>

@@ -21,6 +21,7 @@ class News extends Component{
     
 
   render() {
+
     return(
         <View style={{
             flex: 1,
@@ -34,7 +35,7 @@ class News extends Component{
         <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Post Something!</Text>
         </TouchableOpacity>
-            {this.props.posts.map(post => (
+            {this.props.posts.slice(0).reverse().map(post => (
                 <View key={post.id}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                     <Image source={{uri: post.user.profilePic}} style={{width: 50, height: 50, borderRadius: 1000}}/>
