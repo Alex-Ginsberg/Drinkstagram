@@ -18,7 +18,12 @@ router.post('/', (req, res, next) => {
     }
   })
   .then(user => {
-    res.send({success: true, message: user})
+    if (user !== null){
+      res.send({success: true, message: user})
+    }
+    else{
+      res.send({success: false})
+    }
   })
 })
 

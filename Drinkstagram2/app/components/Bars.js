@@ -31,6 +31,14 @@ class Bars extends Component{
                     <Text style={styles.buttonText}>{location.name}</Text>
                 </TouchableOpacity>
             ))}
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.lowRight} >
+                <Text style={styles.buttonText}>Don't see what you're looking for? Be the first to post for a bar!</Text>
+            </TouchableOpacity>
             </ScrollView>
             <View style={{height: 50, backgroundColor: 'steelblue'}} >
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >

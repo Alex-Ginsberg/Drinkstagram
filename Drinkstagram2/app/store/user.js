@@ -24,6 +24,9 @@ dispatch =>
         if (payload.success === true) {
             dispatch(login(payload.message))
         }
+        else {
+          dispatch(login({message: 'fail'}))
+        }
     })    
     .catch(err => console.log(err))
 

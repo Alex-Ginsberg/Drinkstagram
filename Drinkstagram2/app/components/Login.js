@@ -50,7 +50,8 @@ class Login extends Component{
 const mapState = (state) => {
     return {
         userText: state.userText,
-        passwordText: state.passwordText
+        passwordText: state.passwordText,
+        user: state.user
     }
 }
 
