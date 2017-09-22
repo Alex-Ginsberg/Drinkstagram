@@ -22,6 +22,7 @@ class Bars extends Component{
             justifyContent: 'space-between',
           }}>
           <View style={{height: 60, backgroundColor: 'powderblue'}}><Text style={styles.logo}>Drinkstagram</Text></View>
+          <Image source={{uri: 'https://i.pinimg.com/originals/f5/58/a9/f558a9c7e36608a1f09fa3d628c9aee7.jpg'}} style={styles.backgroundImage}>
           <ScrollView>
             {this.props.locations.map(location => (
                 <TouchableOpacity key={location.id} onPress={() => {
@@ -51,6 +52,7 @@ class Bars extends Component{
                 <Text style={styles.buttonText}>Post</Text>
             </TouchableOpacity>
             </View>
+            </Image>
         </View>
     )
   }
