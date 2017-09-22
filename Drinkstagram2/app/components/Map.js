@@ -2,8 +2,8 @@ import MapView from 'react-native-maps';
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, Picker} from 'react-native'
-import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, fetchLocations, setCurrentLocation, setDrinkText} from '../store'
+import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, Picker, TouchableHighlight} from 'react-native'
+import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, fetchLocations, setCurrentLocation, setDrinkText, setCurrentLat, setCurrentLng} from '../store'
 import ImagePicker from 'react-native-image-picker';
 import Google from './Google'
 import Navbar from './Navbar'
@@ -11,34 +11,31 @@ import Navbar from './Navbar'
 class Map extends Component{
     constructor() {
         super()
-        this.state = {
-            latitude: 10,
-            longitude: 10
-        }
+        // this.state = {
+        //     latitude: 10,
+        //     longitude: 10,
+        //     error: null
+        // }
     }
 
     componentDidMount() {
-        console.log('MOuNTING', navigator)
+        console.log('Inside mount')
         this.props.getLocations()
         navigator.geolocation.getCurrentPosition(
           (position) => {
-              console.log('POSITION: ', position)
-            this.setState({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              error: null,
-            });
+              console.log(position, 'position')
+              this.props.setLat(position.coords.latitude)
+              this.props.setLng(position.coords.longitude)
           },
-          (error) => {console.log('INSIDE ERRPR', error.message)
-              this.setState({ error: error.message })},
-          { enableHighAccuracy: false, timeout: 1000000, maximumAge: 1000 }
+          (error) => {console.log('INSIDE ERRPR', error.message)},
+          { enableHighAccuracy: false, timeout: 50000, maximumAge: 1000 }
         );
       }
 
 
   render() {
-      const latitude = this.state.latitude
-      const longitude = this.state.longitude
+      const latitude = this.props.currentLat
+      const longitude = this.props.currentLng
     return(
         <View style ={styles.container}>
         <MapView
@@ -53,15 +50,17 @@ class Map extends Component{
         <MapView.Marker
             coordinate={{latitude, longitude}}
             title={'You!'}
-            description={'Current Location'}
+            description={latitude + ''}
             image={'https://d30y9cdsu7xlg0.cloudfront.net/png/25719-200.png'}
         />
         {this.props.locations.map(location => (
             <MapView.Marker key={location.id}
             coordinate={{latitude: location.lat, longitude: location.long}}
             title={location.name}
-            description={location.description}
-        />
+            description={location.description} />
+
+
+
         ))}
         </MapView>
       </View>
@@ -73,7 +72,9 @@ class Map extends Component{
 
 const mapState = (state) => {
     return {
-        locations: state.locations
+        locations: state.locations,
+        currentLat: state.currentLat,
+        currentLng: state.currentLng
     }
 }
 
@@ -82,6 +83,12 @@ const mapDispatch = (dispatch) => {
         getLocations() {
             dispatch(fetchLocations())
         },
+        setLat(lat) {
+            dispatch(setCurrentLat(lat))
+        },
+        setLng(lng) {
+            dispatch(setCurrentLng(lng))
+        }
     }
 }
 
