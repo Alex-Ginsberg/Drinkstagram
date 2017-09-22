@@ -48,8 +48,17 @@ class News extends Component{
                 </View>
             ))}
             </ScrollView>
-            <View style={{height: 50, backgroundColor: 'steelblue'}} ></View>
-            <Navbar navigator={this.props.navigator}/>
+            <View style={{height: 50, backgroundColor: 'steelblue'}} >
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >
+                <Text style={styles.buttonText}>News Feed</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.lowMiddle} >
+                <Text style={styles.buttonText}>Bars</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Post'})} style={styles.lowRight} >
+                <Text style={styles.buttonText}>Post</Text>
+            </TouchableOpacity>
+            </View>
        
         
         </View>
@@ -130,11 +139,28 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         alignSelf: 'stretch',
-        margin: 20,
-        padding: 20,
+        margin: 0,
+        padding: 0,
         backgroundColor: 'rgba(255,255,255,0.6)',
         borderWidth: 1,
         borderColor: '#fff'
+    },
+    lowLeft: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+    },
+    lowMiddle: {
+        position: 'absolute',
+        bottom:0,
+        right:25,
+        left:200,
+        marginLeft:-150,
+    },
+    lowRight: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
     },
     buttonText: {
         fontSize: 16, 

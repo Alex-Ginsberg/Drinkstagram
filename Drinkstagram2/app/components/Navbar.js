@@ -14,7 +14,7 @@ export default class Navbar extends Component {
         labelColor="white"
         rippleColor="white"
         style={{ height: 56, elevation: 8, position: 'absolute', left: 0, bottom: 0, right: 0 }}
-        onTabChange={(newTabIndex) => this.props.navigator.push({id: navArray[newTabIndex]})}
+        onTabChange={(newTabIndex) => {this.props.navigator.push({id: navArray[newTabIndex]}); alert(newTabIndex)}}
       >
         <Tab
           barBackgroundColor="#37474F"

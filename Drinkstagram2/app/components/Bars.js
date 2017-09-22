@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage} from 'react-native'
+import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, ScrollView} from 'react-native'
 import {setUserText, setPasswordText, postUser, fetchLocations, setSelectedBar} from '../store'
-import Navbar from './Navbar'
+
 
 class Bars extends Component{
     constructor() {
@@ -21,6 +21,8 @@ class Bars extends Component{
             flexDirection: 'column',
             justifyContent: 'space-between',
           }}>
+          <View style={{height: 50, backgroundColor: 'powderblue'}}><Text>Drinkstagram</Text></View>
+          <ScrollView>
             {this.props.locations.map(location => (
                 <TouchableOpacity key={location.id} onPress={() => {
                     this.props.setBar(location)
@@ -29,7 +31,18 @@ class Bars extends Component{
                     <Text style={styles.buttonText}>{location.name}</Text>
                 </TouchableOpacity>
             ))}
-            <Navbar navigator={this.props.navigator}/>
+            </ScrollView>
+            <View style={{height: 50, backgroundColor: 'steelblue'}} >
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >
+                <Text style={styles.buttonText}>News Feed</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.lowMiddle} >
+                <Text style={styles.buttonText}>Bars</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Post'})} style={styles.lowRight} >
+                <Text style={styles.buttonText}>Post</Text>
+            </TouchableOpacity>
+            </View>
         </View>
     )
   }
@@ -102,6 +115,23 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.6)',
         borderWidth: 1,
         borderColor: '#fff'
+    },
+    lowLeft: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+    },
+    lowMiddle: {
+        position: 'absolute',
+        bottom:0,
+        right:25,
+        left:200,
+        marginLeft:-150,
+    },
+    lowRight: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
     },
     buttonText: {
         fontSize: 16, 
