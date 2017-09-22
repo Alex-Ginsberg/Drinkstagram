@@ -5,6 +5,7 @@ import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity,
 import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, fetchLocations, setCurrentLocation} from '../store'
 import ImagePicker from 'react-native-image-picker';
 import Google from './Google'
+import Navbar from './Navbar'
 
 class PostForm extends Component{
     constructor() {
@@ -73,10 +74,12 @@ class PostForm extends Component{
             <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)} style={styles.buttonContainer}>
                 <Text>Select Photo</Text>
                 </TouchableOpacity>
+            <Image source={{uri: this.props.image.uri}} style={{width: 300, height: 200}}/>
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Google'})} style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Select a Bar</Text>
             </TouchableOpacity>
         </View>
+        {/* <Navbar navigator={this.props.navigator}/> */}
         
     </View>
     )

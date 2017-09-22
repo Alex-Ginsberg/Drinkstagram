@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity} from 'react-native'
+import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import NavigationBar from 'react-native-navigation-bar'
+import Navbar from './Navbar'
+import {fetchPosts} from '../store'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 
@@ -11,22 +13,52 @@ class Memberarea extends Component{
         super()
     }
 
+    componentDidMount() {
+        this.props.getPosts()
+    }
+
   render() {
-    const homePlace = { description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
-    const workPlace = { description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
+    const filteredPosts = this.props.posts.filter(post => post.userId === this.props.user.id)
     return(
-        <View > 
-            <View>
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.buttonContainer}>
+        <View style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}>
+            {/* <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>News Feed</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Bars</Text>
+            </TouchableOpacity> */}
+            <View style={{height: 50, backgroundColor: 'powderblue'}}><Text>Drinkstagram</Text></View>
+            <Text>Welcome back, {this.props.user.username}</Text>
+            <Image source={{uri: this.props.user.profilePic}} style={{width: 200, height: 108, borderRadius: 10}}/>
+            <Text>Your most recent posts: </Text>
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
+            <ScrollView>
+            {filteredPosts.map(post => (
+                <View key={post.id}>
+                    <Image source={{uri: post.image}} style={{width: 200, height: 108, borderRadius: 10}}/>
+                    <Text>{post.content}</Text>
+                    <Text>Rating: {post.rating}</Text>
+                </View>
+            ))}
+            </ScrollView>
+            <View style={{height: 50, backgroundColor: 'steelblue'}} >
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >
+                <Text style={styles.buttonText}>News Feed</Text>
             </TouchableOpacity>
-        </View>
-            <Text>WELCOME{this.props.user.username}</Text>
-            <Image source={{uri: this.props.user.profilePic}} style={{width: 100, height: 58}}/>
-            
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.lowMiddle} >
+                <Text style={styles.buttonText}>Bars</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.lowRight} >
+                <Text style={styles.buttonText}>Post</Text>
+            </TouchableOpacity>
+            </View>
         </View>
     )
   }
@@ -35,13 +67,16 @@ class Memberarea extends Component{
 const mapState = (state) => {
     return {
         user: state.user,
-        userText: state.userText
+        userText: state.userText,
+        posts: state.posts
     }
 }
 
 const mapDispatch = (dispatch) => {
     return {
-        
+        getPosts() {
+            dispatch(fetchPosts())
+        },
     }
 }
 
@@ -89,11 +124,28 @@ const mapDispatch = (dispatch) => {
     },
     buttonContainer: {
         alignSelf: 'stretch',
-        margin: 20,
-        padding: 20,
+        margin: 0,
+        padding: 0,
         backgroundColor: 'rgba(255,255,255,0.6)',
         borderWidth: 1,
         borderColor: '#fff'
+    },
+    lowLeft: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+    },
+    lowMiddle: {
+        position: 'absolute',
+        bottom:0,
+        right:25,
+        left:200,
+        marginLeft:-150,
+    },
+    lowRight: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
     },
     buttonText: {
         fontSize: 16, 

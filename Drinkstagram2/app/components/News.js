@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Picker, ScrollView} from 'react-native'
 import NavigationBar from 'react-native-navigation-bar'
 import {fetchPosts, setContentText, setCurrentRating, postPost, setImage} from '../store'
+import Navbar from './Navbar'
 
 
 
@@ -21,24 +22,48 @@ class News extends Component{
 
   render() {
     return(
+        <View style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}>
+          <View style={{height: 50, backgroundColor: 'powderblue'}}><Text>Drinkstagram</Text></View>
         <ScrollView>
-        <View > 
+        
             
         <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Post Something!</Text>
         </TouchableOpacity>
             {this.props.posts.map(post => (
                 <View key={post.id}>
-                <Text>{post.user.username}</Text>
-                <Image source={{uri: post.user.profilePic}} style={{width: 100, height: 50}}/>
-                <Image source={{uri: post.image}} style={{width: 200, height: 100}}/>
+                <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                    <Image source={{uri: post.user.profilePic}} style={{width: 50, height: 50, borderRadius: 1000}}/>
+                    <Text>{post.user.username}</Text>
+                </View>
+                <Image source={{uri: post.image}} style={{width: 300, height: 200}}/>
                 <Text>{post.content}</Text>
                 <Text>{post.rating}</Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
                 </View>
             ))}
-            
+            </ScrollView>
+            <View style={{height: 50, backgroundColor: 'steelblue'}} >
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >
+                <Text style={styles.buttonText}>News Feed</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.lowMiddle} >
+                <Text style={styles.buttonText}>Bars</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.lowRight} >
+                <Text style={styles.buttonText}>Post</Text>
+            </TouchableOpacity>
+            </View>
+       
+        
         </View>
-        </ScrollView>
     )
   }
 }
@@ -116,11 +141,28 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         alignSelf: 'stretch',
-        margin: 20,
-        padding: 20,
+        margin: 0,
+        padding: 0,
         backgroundColor: 'rgba(255,255,255,0.6)',
         borderWidth: 1,
         borderColor: '#fff'
+    },
+    lowLeft: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+    },
+    lowMiddle: {
+        position: 'absolute',
+        bottom:0,
+        right:25,
+        left:200,
+        marginLeft:-150,
+    },
+    lowRight: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
     },
     buttonText: {
         fontSize: 16, 

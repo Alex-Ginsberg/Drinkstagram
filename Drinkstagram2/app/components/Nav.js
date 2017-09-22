@@ -1,44 +1,15 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, ScrollView} from 'react-native'
-import {setUserText, setPasswordText, postUser, fetchLocations, setSelectedBar, fetchPosts} from '../store'
+import React, { Component } from 'react'
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native'
 
-class SelectedBar extends Component{
+ 
+export default class Nav extends Component {
     constructor() {
         super()
     }
 
-    componentDidMount() {
-        this.props.getPosts()
-    }
-
-  render() {
-    const filteredPosts = this.props.posts.filter(post => post.locationId === this.props.selectedBar.id)
+render() {
     return(
-        <View style={{
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}>
-          <View style={{height: 50, backgroundColor: 'powderblue'}}><Text>Drinkstagram</Text></View>
-            <Text>{this.props.selectedBar.name}</Text>
-            <ScrollView>
-            {filteredPosts.map(post => (
-                <View key={post.id}>
-                <Text>{post.user.username}</Text>
-                <Image source={{uri: post.user.profilePic}} style={{width: 100, height: 50}}/>
-                <Image source={{uri: post.image}} style={{width: 200, height: 100}}/>
-                <Text>{post.content}</Text>
-                <Text>{post.rating}</Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                </View>
-                ))}
-            </ScrollView>
-            <View style={{height: 50, backgroundColor: 'steelblue'}} >
+    <View>
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >
                 <Text style={styles.buttonText}>News Feed</Text>
             </TouchableOpacity>
@@ -48,28 +19,10 @@ class SelectedBar extends Component{
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.lowRight} >
                 <Text style={styles.buttonText}>Post</Text>
             </TouchableOpacity>
-            </View>
-        </View>
+    </View>
     )
-  }
 }
-
-const mapState = (state) => {
-    return {
-        selectedBar: state.selectedBar,
-        posts: state.posts
-    }
 }
-
-const mapDispatch = (dispatch) => {
-    return {
-        getPosts() {
-            dispatch(fetchPosts())
-        },
-    }
-}
-
-export default connect(mapState, mapDispatch)(SelectedBar)
 
 const styles = StyleSheet.create({
     container: {
@@ -143,4 +96,3 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 })
-// AppRegistry.registerComponent('Login', () => Login)
