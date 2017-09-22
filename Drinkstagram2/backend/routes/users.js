@@ -9,7 +9,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', (req, res, next) => {
-  console.log('INSIDE THE POST')
   const username = req.body.username
   const password = req.body.password
   User.findOne({
@@ -19,13 +18,11 @@ router.post('/', (req, res, next) => {
     }
   })
   .then(user => {
-    console.log(user)
     res.send({success: true, message: user})
   })
 })
 
 router.post('/signup', (req, res, next) => {
-  console.log('IMAGE', req.body.profilePic)
   const username = req.body.username
   const password = req.body.password
   const profilePic = req.body.profilePic.uri

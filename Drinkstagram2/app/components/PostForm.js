@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, Picker} from 'react-native'
-import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, fetchLocations, setCurrentLocation} from '../store'
+import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, fetchLocations, setCurrentLocation, setDrinkText} from '../store'
 import ImagePicker from 'react-native-image-picker';
 import Google from './Google'
 import Navbar from './Navbar'
@@ -50,7 +50,7 @@ class PostForm extends Component{
     }
 
     post() {
-        this.props.sendPost(this.props.currentContent, this.props.currentRating, this.props.user.id, this.props.image)
+        this.props.sendPost(this.props.currentContent, this.props.currentRating, this.props.user.id, this.props.image, this.props.currentDrinkName)
     }
 
 
@@ -59,8 +59,12 @@ class PostForm extends Component{
         <View style={styles.content}>
         <View style={styles.inputContainer}>
             <TextInput underlineColorAndroid='transparent' style={styles.input}
+             onChangeText={name => this.props.setDrinkText(name)}   
+             value={this.props.currentDrinkName} placeholder="Drink Name">
+            </TextInput>
+            <TextInput underlineColorAndroid='transparent' style={styles.input}
              onChangeText={content => this.props.setCurrentContent(content)}   
-             value={this.props.currentContent} placeholder="content">
+             value={this.props.currentContent} placeholder="Content">
             </TextInput>
             <Picker
                 selectedValue={this.props.currentRating}
@@ -79,8 +83,6 @@ class PostForm extends Component{
                 <Text style={styles.buttonText}>Select a Bar</Text>
             </TouchableOpacity>
         </View>
-        {/* <Navbar navigator={this.props.navigator}/> */}
-        
     </View>
     )
   }
@@ -95,7 +97,8 @@ const mapState = (state) => {
         currentContent: state.currentContent,
         image: state.image,
         locations: state.locations,
-        currentLocation: state.currentLocation
+        currentLocation: state.currentLocation,
+        currentDrinkName: state.currentDrinkName
     }
 }
 
@@ -118,6 +121,9 @@ const mapDispatch = (dispatch) => {
         },
         setCurrentLocation(place) {
             dispatch(setCurrentLocation(place))
+        },
+        setDrinkText(text) {
+            dispatch(setDrinkText(text))
         }
     }
 }

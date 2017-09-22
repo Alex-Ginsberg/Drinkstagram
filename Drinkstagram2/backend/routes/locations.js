@@ -4,15 +4,8 @@ const {Location, Post} = require('../db/models')
 
 
 router.post('/', (req, res, next) => {
-  // console.log('DATA: ', req.body.data)
-  // console.log('details: ', req.body.details)
   const data = req.body.data
   const details = req.body.details
-  console.log('DESC: ',data.description)
-  console.log('googleId: ',data.id)
-  console.log('name: ',data.structured_formatting.main_text)
-  console.log('lat: ',details.geometry.location.lat)
-  console.log('long: ',details.geometry.location.lng)
   Location.create({
       description: data.description,
       googleId: data.id,
@@ -21,7 +14,6 @@ router.post('/', (req, res, next) => {
       long: details.geometry.location.lng  
   })
   .then(location => {
-    console.log('CREATED: ', location)
     const currentLocation = location
     Post.create({
       content: req.body.content,
