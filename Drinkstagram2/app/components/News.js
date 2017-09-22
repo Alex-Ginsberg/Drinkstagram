@@ -29,26 +29,22 @@ class News extends Component{
             justifyContent: 'space-between',
           }}>
           <View style={{height: 60, backgroundColor: 'powderblue'}}><Text style={styles.logo}>Drinkstagram</Text></View>
+          <Image source={{uri: 'https://i.pinimg.com/originals/f5/58/a9/f558a9c7e36608a1f09fa3d628c9aee7.jpg'}} style={styles.backgroundImage}>
         <ScrollView>
-        
-            
-        <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Post Something!</Text>
-        </TouchableOpacity>
             {this.props.posts.slice(0).reverse().map(post => (
-                <View key={post.id}>
+                <View key={post.id} style={styles.postContainer}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                     <Image source={{uri: post.user.profilePic}} style={{width: 50, height: 50, borderRadius: 1000}}/>
-                    <Text>{post.user.username}</Text>
+                    <Text style={styles.name}>{post.user.username}</Text>
                 </View>
                 <TouchableOpacity onPress={() => {
                     this.props.setBar(post.location)
                     this.props.navigator.push({id: 'SelectedBar'})}}>
                     <Text style={styles.buttonText}>{post.name}, {post.location.name}</Text>
                 </TouchableOpacity>
-                <Image source={{uri: post.image}} style={{width: 300, height: 200}}/>
-                <Text>{post.content}</Text>
-                <Text>{post.rating}</Text>
+                <Image source={{uri: post.image}} style={{width: 250, height: 208, borderRadius: 10, opacity:1}}/>
+                <Text style={styles.words}>{post.content}</Text>
+                <Text style={styles.words}>{post.rating}</Text>
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>
@@ -68,7 +64,7 @@ class News extends Component{
             </TouchableOpacity>
             </View>
        
-        
+        </Image>
         </View>
     )
   }
@@ -110,6 +106,28 @@ const mapDispatch = (dispatch) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
+    },
+    name: {
+        color: 'black',
+        fontSize: 25,
+        fontStyle: 'italic',
+        fontWeight: 'bold', 
+    },
+    postContainer: {
+        margin: 20,
+        marginBottom: 0, 
+        padding: 20,
+        paddingBottom: 10,
+        alignSelf: 'stretch',
+        borderWidth: 1, 
+        borderColor: '#fff',
+        backgroundColor: 'rgba(255,255,255,0.2)',
+    },
+    words: {
+        color: 'black',
+        fontSize: 15,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
     },
     backgroundImage: {
         flex: 1,
