@@ -28,17 +28,23 @@ class SelectedBar extends Component{
           }}>
           <View style={{height: 60, backgroundColor: 'powderblue'}}><Text style={styles.logo}>Drinkstagram</Text></View>
           <Text style={styles.logo}>{this.props.selectedBar.name}</Text>
-          <Text style={styles.logo}>Rating: {avgRating}</Text>
+          <Text style={styles.rating}>Rating: {avgRating}</Text>
           <Text>{this.props.selectedBar.description}</Text>
+          <Text></Text>
+          <Text></Text>
+          <Text></Text>
           <Text></Text>
             <ScrollView>
             {filteredPosts.slice(0).reverse().map(post => (
                 <View key={post.id}>
-                <Text>{post.user.username}</Text>
-                <Image source={{uri: post.user.profilePic}} style={{width: 100, height: 50}}/>
-                <Image source={{uri: post.image}} style={{width: 200, height: 100}}/>
+                <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                    <Image source={{uri: post.user.profilePic}} style={{width: 50, height: 50, borderRadius: 1000}}/>
+                    <Text>{post.user.username}</Text>
+                </View>
+                <Text style={styles.buttonText}>{post.name}</Text>
+                <Image source={{uri: post.image}} style={{width: 300, height: 200}}/>
                 <Text>{post.content}</Text>
-                <Text>{post.rating}</Text>
+                <Text>Rating: {post.rating}</Text>
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>
@@ -112,7 +118,17 @@ const styles = StyleSheet.create({
         textShadowColor: '#252525',
         textShadowOffset: {width: 2, height: 2},
         textShadowRadius: 15, 
-        marginBottom: 20, 
+        marginBottom: 10, 
+    },
+    rating: {
+        color: 'white',
+        fontSize: 20,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        textShadowColor: '#252525',
+        textShadowOffset: {width: 2, height: 2},
+        textShadowRadius: 15, 
+        marginBottom: 10, 
     },
     inputContainer: {
         margin: 20,
