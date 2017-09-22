@@ -48,6 +48,9 @@ class Memberarea extends Component{
                     <Text></Text>
                 </View>
             ))}
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Map'})} style={styles.lowRight} >
+                <Text style={styles.buttonText}>Map</Text>
+            </TouchableOpacity>
             </ScrollView>
             <View style={{height: 50, backgroundColor: 'steelblue'}} >
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >

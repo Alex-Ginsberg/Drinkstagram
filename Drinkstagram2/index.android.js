@@ -8,6 +8,7 @@ import PostForm from './app/components/PostForm'
 import Google from './app/components/Google'
 import Bars from './app/components/Bars'
 import SelectedBar from './app/components/SelectedBar'
+import Map from './app/components/Map'
 import NavigationExperimental from 'react-native-deprecated-custom-components';
 const Navigator = NavigationExperimental.Navigator
 import {Provider} from 'react-redux'
@@ -45,6 +46,8 @@ export default class Drinkstagram2 extends Component{
         return(<Google navigator = {navigator} />)
       case 'SelectedBar':
         return(<SelectedBar navigator = {navigator} />)
+      case 'Map':
+        return(<Map navigator = {navigator} />)
     }
   }
 }
