@@ -27,9 +27,9 @@ dispatch =>
     })    
     .catch(err => console.log(err))
 
-export const postPost = (content, rating, userId, image, locationId) => 
+export const postPost = (content, rating, userId, image, locationId, name) => 
   dispatch =>
-    axios.post('http://172.16.23.37:3000/posts', {content, rating, userId, image, locationId})
+    axios.post('http://172.16.23.37:3000/posts', {content, rating, userId, image, locationId, name})
     .then(res => res.data)
     .then(post => {
         dispatch(newPost(post))

@@ -21,7 +21,7 @@ class GooglePlacesInput extends Component{
             }
         }
         if (locationExists) {
-            this.props.sendPost(this.props.currentContent, this.props.currentRating, this.props.user.id, this.props.image, currentLocation)
+            this.props.sendPost(this.props.currentContent, this.props.currentRating, this.props.user.id, this.props.image, currentLocation, this.props.currentDrinkName)
             this.props.navigator.push({id: 'News'})
         }
 
@@ -90,7 +90,8 @@ const mapState = (state) => {
         currentRating: state.currentRating,
         currentContent: state.currentContent,
         image: state.image,
-        locations: state.locations
+        locations: state.locations,
+        currentDrinkName: state.currentDrinkName
     }
 }
 
@@ -104,8 +105,8 @@ const mapDispatch = (dispatch) => {
             // if location doesnt exist, make it, make post with that location id
 
         },
-        sendPost(content, rating, userId, image, location) {
-            dispatch(postPost(content, rating, userId, image, location))
+        sendPost(content, rating, userId, image, location, name) {
+            dispatch(postPost(content, rating, userId, image, location, name))
         },
         createLocation(data, details, content, rating, userId, image) {
             dispatch(postLocation(data, details, content, rating, userId, image))

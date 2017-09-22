@@ -22,7 +22,6 @@ dispatch =>
     .then(res => res.data)
     .then(payload => {
         if (payload.success === true) {
-            console.log('HHHEEEERRREEE')
             dispatch(login(payload.message))
         }
     })    
