@@ -61,6 +61,7 @@ class Signup extends Component{
                             <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)} style={styles.buttonContainer}>
                             <Text>Select Photo</Text>
                             </TouchableOpacity>
+                            <Image source={{uri: this.props.image.uri}} style={{width: 300, height: 200}}/>
                             <TouchableOpacity onPress={this.signup} style={styles.buttonContainer}>
                             <Text style={styles.buttonText}>SIGNUP</Text>
                             </TouchableOpacity>

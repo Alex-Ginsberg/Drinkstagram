@@ -74,6 +74,7 @@ class PostForm extends Component{
             <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)} style={styles.buttonContainer}>
                 <Text>Select Photo</Text>
                 </TouchableOpacity>
+            <Image source={{uri: this.props.image.uri}} style={{width: 300, height: 200}}/>
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Google'})} style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Select a Bar</Text>
             </TouchableOpacity>

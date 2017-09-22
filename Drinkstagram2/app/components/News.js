@@ -36,9 +36,11 @@ class News extends Component{
         </TouchableOpacity>
             {this.props.posts.map(post => (
                 <View key={post.id}>
-                <Text>{post.user.username}</Text>
-                <Image source={{uri: post.user.profilePic}} style={{width: 100, height: 50}}/>
-                <Image source={{uri: post.image}} style={{width: 200, height: 100}}/>
+                <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                    <Image source={{uri: post.user.profilePic}} style={{width: 50, height: 50, borderRadius: 1000}}/>
+                    <Text>{post.user.username}</Text>
+                </View>
+                <Image source={{uri: post.image}} style={{width: 300, height: 200}}/>
                 <Text>{post.content}</Text>
                 <Text>{post.rating}</Text>
                 <Text></Text>
@@ -55,7 +57,7 @@ class News extends Component{
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.lowMiddle} >
                 <Text style={styles.buttonText}>Bars</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Post'})} style={styles.lowRight} >
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.lowRight} >
                 <Text style={styles.buttonText}>Post</Text>
             </TouchableOpacity>
             </View>

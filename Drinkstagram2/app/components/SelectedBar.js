@@ -45,7 +45,7 @@ class SelectedBar extends Component{
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.lowMiddle} >
                 <Text style={styles.buttonText}>Bars</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Post'})} style={styles.lowRight} >
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.lowRight} >
                 <Text style={styles.buttonText}>Post</Text>
             </TouchableOpacity>
             </View>
