@@ -22,7 +22,12 @@ class News extends Component{
 
   render() {
     return(
-        <View style={{flex: 1}}> 
+        <View style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}>
+          <View style={{height: 50, backgroundColor: 'powderblue'}}><Text>Drinkstagram</Text></View>
         <ScrollView>
         
             
@@ -42,9 +47,11 @@ class News extends Component{
                 <Text></Text>
                 </View>
             ))}
-            <View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}><Navbar navigator={this.props.navigator}/></View>
+            </ScrollView>
+            <View style={{height: 50, backgroundColor: 'steelblue'}} ></View>
+            <Navbar navigator={this.props.navigator}/>
        
-        </ScrollView>
+        
         </View>
     )
   }

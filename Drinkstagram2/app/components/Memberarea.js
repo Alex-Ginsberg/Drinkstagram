@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity} from 'react-native'
+import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import NavigationBar from 'react-native-navigation-bar'
 import Navbar from './Navbar'
 import {fetchPosts} from '../store'
@@ -39,6 +39,7 @@ class Memberarea extends Component{
             <Text></Text>
             <Text></Text>
             <Text></Text>
+            <ScrollView>
             {filteredPosts.map(post => (
                 <View>
                     <Image source={{uri: post.image}} style={{width: 200, height: 108, borderRadius: 10}}/>
@@ -46,6 +47,7 @@ class Memberarea extends Component{
                     <Text>Rating: {post.rating}</Text>
                 </View>
             ))}
+            </ScrollView>
             <View style={{height: 50, backgroundColor: 'steelblue'}} ></View>
             <Navbar navigator={this.props.navigator}/>
         </View>

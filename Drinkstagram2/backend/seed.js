@@ -19,6 +19,7 @@ let data = {
         {name: 'Mai Tai', image: 'https://www.thecocktailproject.com/sites/default/files/styles/standard-recipe-image-mobile/public/basic-dekuyper-banana-mai-tai.jpg?itok=086wyQcJ', content: 'This drink was fantastic!', rating: 5, userId: 3, locationId: 1},
         {name: 'Tequilla Sunrise', image: 'https://cdn.liquor.com/wp-content/uploads/2017/03/07152925/tequila-sunrise-720x720-recipe.jpg', content: 'This drink was fantastic!', rating: 3, userId: 3, locationId: 2},
         {name: 'Rum and Coke', image: 'https://cdn.liquor.com/wp-content/uploads/2015/10/19223251/b-20110420145340.jpg', content: 'This drink was terrible!', rating: 2, userId: 4, locationId: 1},
+        {name: 'Martini', image: 'http://del.h-cdn.co/assets/cm/15/10/54f6856c07d4b_-_cuervo_especial_pomegranate_margarita_martini-xl-28464567.jpg', content: 'This drink was fantastic!', rating: 5, userId: 1, locationId: 1},
 
     ]
 }
