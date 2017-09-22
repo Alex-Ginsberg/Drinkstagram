@@ -25,13 +25,7 @@ class Memberarea extends Component{
             flexDirection: 'column',
             justifyContent: 'space-between',
           }}>
-            {/* <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>News Feed</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Bars</Text>
-            </TouchableOpacity> */}
-            <View style={{height: 50, backgroundColor: 'powderblue'}}><Text>Drinkstagram</Text></View>
+            <View style={{height: 60, backgroundColor: 'powderblue'}}><Text style={styles.logo}>Drinkstagram</Text></View>
             <Text>Welcome back, {this.props.user.username}</Text>
             <Image source={{uri: this.props.user.profilePic}} style={{width: 200, height: 108, borderRadius: 10}}/>
             <Text>Your most recent posts: </Text>
@@ -40,11 +34,18 @@ class Memberarea extends Component{
             <Text></Text>
             <Text></Text>
             <ScrollView>
-            {filteredPosts.map(post => (
+            {filteredPosts.slice(0).reverse().map(post => (
                 <View key={post.id}>
+                    <Text>Drink: {post.name}</Text>
+                    <Text>Bar: {post.location.name}</Text>
                     <Image source={{uri: post.image}} style={{width: 200, height: 108, borderRadius: 10}}/>
                     <Text>{post.content}</Text>
                     <Text>Rating: {post.rating}</Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
                 </View>
             ))}
             </ScrollView>

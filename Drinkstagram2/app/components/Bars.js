@@ -21,7 +21,7 @@ class Bars extends Component{
             flexDirection: 'column',
             justifyContent: 'space-between',
           }}>
-          <View style={{height: 50, backgroundColor: 'powderblue'}}><Text>Drinkstagram</Text></View>
+          <View style={{height: 60, backgroundColor: 'powderblue'}}><Text style={styles.logo}>Drinkstagram</Text></View>
           <ScrollView>
             {this.props.locations.map(location => (
                 <TouchableOpacity key={location.id} onPress={() => {
