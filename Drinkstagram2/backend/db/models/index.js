@@ -6,7 +6,8 @@ const Location = require('./location')
 Post.belongsTo(User)
 
 
-Location.hasMany(Post)
+// Location.hasMany(Post)
+Post.belongsTo(Location)
 
 module.exports = {
     User,

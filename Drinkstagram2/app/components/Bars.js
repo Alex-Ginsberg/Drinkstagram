@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage} from 'react-native'
 import {setUserText, setPasswordText, postUser, fetchLocations, setSelectedBar} from '../store'
+import Navbar from './Navbar'
 
 class Bars extends Component{
     constructor() {
@@ -15,7 +16,11 @@ class Bars extends Component{
 
   render() {
     return(
-        <View>
+        <View style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}>
             {this.props.locations.map(location => (
                 <TouchableOpacity key={location.id} onPress={() => {
                     this.props.setBar(location)
@@ -24,6 +29,7 @@ class Bars extends Component{
                     <Text style={styles.buttonText}>{location.name}</Text>
                 </TouchableOpacity>
             ))}
+            <Navbar navigator={this.props.navigator}/>
         </View>
     )
   }

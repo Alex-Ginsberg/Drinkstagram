@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity} from 'react-native'
 import NavigationBar from 'react-native-navigation-bar'
+import Navbar from './Navbar'
+import {fetchPosts} from '../store'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 
@@ -11,22 +13,41 @@ class Memberarea extends Component{
         super()
     }
 
+    componentDidMount() {
+        this.props.getPosts()
+    }
+
   render() {
-    const homePlace = { description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
-    const workPlace = { description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
+    const filteredPosts = this.props.posts.filter(post => post.userId === this.props.user.id)
     return(
-        <View > 
-            <View>
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.buttonContainer}>
+        <View style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}>
+            {/* <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>News Feed</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Bars</Text>
-            </TouchableOpacity>
-        </View>
-            <Text>WELCOME{this.props.user.username}</Text>
-            <Image source={{uri: this.props.user.profilePic}} style={{width: 100, height: 58}}/>
-            
+            </TouchableOpacity> */}
+            <View style={{height: 50, backgroundColor: 'powderblue'}}><Text>Drinkstagram</Text></View>
+            <Text>Welcome back, {this.props.user.username}</Text>
+            <Image source={{uri: this.props.user.profilePic}} style={{width: 200, height: 108, borderRadius: 10}}/>
+            <Text>Your most recent posts: </Text>
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
+            {filteredPosts.map(post => (
+                <View>
+                    <Image source={{uri: post.image}} style={{width: 200, height: 108, borderRadius: 10}}/>
+                    <Text>{post.content}</Text>
+                    <Text>Rating: {post.rating}</Text>
+                </View>
+            ))}
+            <View style={{height: 50, backgroundColor: 'steelblue'}} ></View>
+            <Navbar navigator={this.props.navigator}/>
         </View>
     )
   }
@@ -35,13 +56,16 @@ class Memberarea extends Component{
 const mapState = (state) => {
     return {
         user: state.user,
-        userText: state.userText
+        userText: state.userText,
+        posts: state.posts
     }
 }
 
 const mapDispatch = (dispatch) => {
     return {
-        
+        getPosts() {
+            dispatch(fetchPosts())
+        },
     }
 }
 

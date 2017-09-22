@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage} from 'react-native'
 import {setUserText, setPasswordText, postUser, fetchLocations, setSelectedBar, fetchPosts} from '../store'
+import Navbar from './Navbar'
 
 class Bars extends Component{
     constructor() {
@@ -18,7 +19,20 @@ class Bars extends Component{
     return(
         <View>
             <Text>{this.props.selectedBar.name}</Text>
-            {filteredPosts.map(post => (<Text>{post.content}</Text>))}
+            {filteredPosts.map(post => (
+                <View key={post.id}>
+                <Text>{post.user.username}</Text>
+                <Image source={{uri: post.user.profilePic}} style={{width: 100, height: 50}}/>
+                <Image source={{uri: post.image}} style={{width: 200, height: 100}}/>
+                <Text>{post.content}</Text>
+                <Text>{post.rating}</Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                </View>
+                ))}
+                {/* <Navbar navigator={this.props.navigator}/> */}
         </View>
     )
   }

@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Picker, ScrollView} from 'react-native'
 import NavigationBar from 'react-native-navigation-bar'
 import {fetchPosts, setContentText, setCurrentRating, postPost, setImage} from '../store'
+import Navbar from './Navbar'
 
 
 
@@ -21,8 +22,9 @@ class News extends Component{
 
   render() {
     return(
+        <View style={{flex: 1}}> 
         <ScrollView>
-        <View > 
+        
             
         <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Post Something!</Text>
@@ -34,11 +36,16 @@ class News extends Component{
                 <Image source={{uri: post.image}} style={{width: 200, height: 100}}/>
                 <Text>{post.content}</Text>
                 <Text>{post.rating}</Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
+                <Text></Text>
                 </View>
             ))}
-            
-        </View>
+            <View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}><Navbar navigator={this.props.navigator}/></View>
+       
         </ScrollView>
+        </View>
     )
   }
 }

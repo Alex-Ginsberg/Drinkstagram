@@ -5,6 +5,7 @@ import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity,
 import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, fetchLocations, setCurrentLocation} from '../store'
 import ImagePicker from 'react-native-image-picker';
 import Google from './Google'
+import Navbar from './Navbar'
 
 class PostForm extends Component{
     constructor() {
@@ -77,6 +78,7 @@ class PostForm extends Component{
                 <Text style={styles.buttonText}>Select a Bar</Text>
             </TouchableOpacity>
         </View>
+        {/* <Navbar navigator={this.props.navigator}/> */}
         
     </View>
     )
