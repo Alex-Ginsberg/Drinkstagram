@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Picker, ScrollView} from 'react-native'
 import NavigationBar from 'react-native-navigation-bar'
-import {fetchPosts, setContentText, setCurrentRating, postPost, setImage} from '../store'
+import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, setSelectedBar} from '../store'
 import Navbar from './Navbar'
 
 
@@ -28,7 +28,7 @@ class News extends Component{
             flexDirection: 'column',
             justifyContent: 'space-between',
           }}>
-          <View style={{height: 50, backgroundColor: 'powderblue'}}><Text>Drinkstagram</Text></View>
+          <View style={{height: 60, backgroundColor: 'powderblue'}}><Text style={styles.logo}>Drinkstagram</Text></View>
         <ScrollView>
         
             
@@ -41,6 +41,11 @@ class News extends Component{
                     <Image source={{uri: post.user.profilePic}} style={{width: 50, height: 50, borderRadius: 1000}}/>
                     <Text>{post.user.username}</Text>
                 </View>
+                <TouchableOpacity onPress={() => {
+                    this.props.setBar(post.location)
+                    this.props.navigator.push({id: 'SelectedBar'})}}>
+                    <Text style={styles.buttonText}>{post.name}, {post.location.name}</Text>
+                </TouchableOpacity>
                 <Image source={{uri: post.image}} style={{width: 300, height: 200}}/>
                 <Text>{post.content}</Text>
                 <Text>{post.rating}</Text>
@@ -96,6 +101,9 @@ const mapDispatch = (dispatch) => {
         setImage (image) {
             dispatch(setImage(image))
         },
+        setBar(bar) {
+            dispatch(setSelectedBar(bar))
+        }
     }
 }
 

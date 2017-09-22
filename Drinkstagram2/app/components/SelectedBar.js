@@ -15,14 +15,22 @@ class SelectedBar extends Component{
 
   render() {
     const filteredPosts = this.props.posts.filter(post => post.locationId === this.props.selectedBar.id)
+    let totalRating = 0
+    for (var i = 0; i < filteredPosts.length; i++) {
+        totalRating += filteredPosts[i].rating
+    }
+    let avgRating = totalRating / filteredPosts.length
     return(
         <View style={{
             flex: 1,
             flexDirection: 'column',
             justifyContent: 'space-between',
           }}>
-          <View style={{height: 50, backgroundColor: 'powderblue'}}><Text>Drinkstagram</Text></View>
-            <Text>{this.props.selectedBar.name}</Text>
+          <View style={{height: 60, backgroundColor: 'powderblue'}}><Text style={styles.logo}>Drinkstagram</Text></View>
+          <Text style={styles.logo}>{this.props.selectedBar.name}</Text>
+          <Text style={styles.logo}>Rating: {avgRating}</Text>
+          <Text>{this.props.selectedBar.description}</Text>
+          <Text></Text>
             <ScrollView>
             {filteredPosts.slice(0).reverse().map(post => (
                 <View key={post.id}>
@@ -74,6 +82,18 @@ export default connect(mapState, mapDispatch)(SelectedBar)
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
+    },
+    heading: {
+        height: 50, 
+        backgroundColor: 'powderblue',
+        color: 'white',
+        fontSize: 40,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        textShadowColor: '#252525',
+        textShadowOffset: {width: 2, height: 2},
+        textShadowRadius: 15, 
+        marginBottom: 20, 
     },
     backgroundImage: {
         flex: 1,
