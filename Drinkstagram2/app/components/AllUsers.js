@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Picker, ScrollView} from 'react-native'
-import {fetchUsers, fetchFollowing} from '../store'
+import {fetchUsers, fetchFollowing, postFollow} from '../store'
 
 
 
 class AllUsers extends Component{
     constructor() {
         super()
-        this.followUser = this.followUser.bind(this)
     }
 
     componentDidMount() {
@@ -17,10 +16,6 @@ class AllUsers extends Component{
         this.props.getFollowing(this.props.user.id)
     }
 
-    followUser() {
-
-    }
-    
 
   render() {
     const filterUsers = this.props.allUsers.filter(user => user.id !== this.props.user.id)
@@ -28,11 +23,9 @@ class AllUsers extends Component{
     for (var i = 0; i < this.props.following.length; i++) {
         following.push(this.props.following[i].followerId)
     }
-    console.log('filterUSr: ', filterUsers)
     const users = filterUsers.filter(user => !following.includes(user.id))
-    console.log('USERS: ', users)
 
-    return(
+    return (
         <View style={{
             flex: 1,
             flexDirection: 'column',
@@ -46,7 +39,8 @@ class AllUsers extends Component{
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                     <Image source={{uri: user.profilePic}} style={{width: 100, height: 100, borderRadius: 1000}}/>
                     <Text style={styles.name}>{user.username}</Text>
-                    <TouchableOpacity style={styles.follow} onPress={this.followUser}>
+                    <TouchableOpacity style={styles.follow} onPress={() => {
+                        this.props.follow(this.props.user.id, user.id)}}>
                         <Text style={{color: 'white', fontSize: 15}}>Follow</Text>
                     </TouchableOpacity>
                 </View>
