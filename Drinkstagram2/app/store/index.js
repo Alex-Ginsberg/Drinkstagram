@@ -16,8 +16,9 @@ import currentLat from './currentLat'
 import currentLng from './currentLng'
 import currentPost from './currentPost'
 import currentComments from './currentComments'
+import commentText from './commentText'
 
-const reducer = combineReducers({userText, passwordText, user, image, posts, currentContent, currentRating, locations, currentLocation, selectedBar, currentDrinkName, currentLat, currentLng, currentPost, currentComments})
+const reducer = combineReducers({userText, passwordText, user, image, posts, currentContent, currentRating, locations, currentLocation, selectedBar, currentDrinkName, currentLat, currentLng, currentPost, currentComments, commentText})
 const middleware = applyMiddleware(thunkMiddleware)
 const store = createStore(reducer, middleware)
 
@@ -36,4 +37,5 @@ export * from './currentLat'
 export * from './currentLng'
 export * from './currentPost'
 export * from './currentComments'
+export * from './commentText'
 export default store
