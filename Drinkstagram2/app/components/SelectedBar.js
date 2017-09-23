@@ -106,6 +106,12 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         fontWeight: 'bold', 
     },
+    words: {
+        color: 'black',
+        fontSize: 15,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+    },
     heading: {
         height: 50, 
         backgroundColor: 'powderblue',
