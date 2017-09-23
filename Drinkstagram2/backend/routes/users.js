@@ -46,7 +46,14 @@ router.get('/following/:id', (req, res, next) => {
     where: {
       userId: req.params.id
     },
-    attributes: ['followerId']
+  })
+  .then(following => res.json(following))
+})
+
+router.post('/following', (req, res, next) => {
+  Friends.create({
+    userId: req.body.userId,
+    followerId: req.body.followerId
   })
   .then(following => res.json(following))
 })
