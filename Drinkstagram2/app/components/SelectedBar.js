@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, ScrollView} from 'react-native'
-import {setUserText, setPasswordText, postUser, fetchLocations, setSelectedBar, fetchPosts} from '../store'
+import {setUserText, setPasswordText, postUser, fetchLocations, setSelectedBar, fetchPosts, setCurrentPost} from '../store'
 
 class SelectedBar extends Component{
     constructor() {
@@ -26,25 +26,32 @@ class SelectedBar extends Component{
             flexDirection: 'column',
             justifyContent: 'space-between',
           }}>
+          <Image source={{uri: 'https://i.pinimg.com/originals/f5/58/a9/f558a9c7e36608a1f09fa3d628c9aee7.jpg'}} style={styles.backgroundImage}>
           <View style={{height: 60, backgroundColor: 'powderblue'}}><Text style={styles.logo}>Drinkstagram</Text></View>
-          <Text style={styles.logo}>{this.props.selectedBar.name}</Text>
-          <Text style={styles.rating}>Rating: {avgRating}</Text>
-          <Text>{this.props.selectedBar.description}</Text>
-          <Text></Text>
-          <Text></Text>
-          <Text></Text>
-          <Text></Text>
+          
             <ScrollView>
+            <Text style={styles.logo}>{this.props.selectedBar.name}</Text>
+            <Text style={styles.rating}>Rating: {avgRating}</Text>
+            <Text>{this.props.selectedBar.description}</Text>
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
             {filteredPosts.slice(0).reverse().map(post => (
-                <View key={post.id}>
+                <View key={post.id} style={styles.postContainer}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                     <Image source={{uri: post.user.profilePic}} style={{width: 50, height: 50, borderRadius: 1000}}/>
-                    <Text>{post.user.username}</Text>
+                    <Text style={styles.name}>{post.user.username}</Text>
                 </View>
                 <Text style={styles.buttonText}>{post.name}</Text>
+                <TouchableOpacity onPress={() => {
+                    this.props.setPost(post)
+                    this.props.navigator.push({id: 'SinglePost'})
+                }}>
                 <Image source={{uri: post.image}} style={{width: 300, height: 200}}/>
-                <Text>{post.content}</Text>
-                <Text>Rating: {post.rating}</Text>
+                </TouchableOpacity>
+                <Text style={styles.words}>{post.content}</Text>
+                <Text style={styles.words}>Rating: {post.rating}/5</Text>
                 <Text></Text>
                 <Text></Text>
                 <Text></Text>
@@ -63,6 +70,7 @@ class SelectedBar extends Component{
                 <Text style={styles.buttonText}>Post</Text>
             </TouchableOpacity>
             </View>
+            </Image>
         </View>
     )
   }
@@ -80,6 +88,9 @@ const mapDispatch = (dispatch) => {
         getPosts() {
             dispatch(fetchPosts())
         },
+        setPost(post) {
+            dispatch(setCurrentPost(post))
+        }
     }
 }
 
@@ -88,6 +99,12 @@ export default connect(mapState, mapDispatch)(SelectedBar)
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
+    },
+    name: {
+        color: 'black',
+        fontSize: 25,
+        fontStyle: 'italic',
+        fontWeight: 'bold', 
     },
     heading: {
         height: 50, 
@@ -140,6 +157,16 @@ const styles = StyleSheet.create({
         borderColor: '#fff',
         backgroundColor: 'rgba(255,255,255,0.2)'
 
+    },
+    postContainer: {
+        margin: 20,
+        marginBottom: 0, 
+        padding: 20,
+        paddingBottom: 10,
+        alignSelf: 'stretch',
+        borderWidth: 1, 
+        borderColor: '#fff',
+        backgroundColor: 'rgba(255,255,255,0.2)',
     },
     input: {
         fontSize: 16,

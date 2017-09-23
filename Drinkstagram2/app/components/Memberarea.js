@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import NavigationBar from 'react-native-navigation-bar'
 import Navbar from './Navbar'
-import {fetchPosts, setSelectedBar} from '../store'
+import {fetchPosts, setSelectedBar, setCurrentPost} from '../store'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 
@@ -44,9 +44,14 @@ class Memberarea extends Component{
                         this.props.navigator.push({id: 'SelectedBar'})}}>
                         <Text style={styles.buttonText}>{post.name}, {post.location.name}</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
+                        this.props.setPost(post)
+                        this.props.navigator.push({id: 'SinglePost'})
+                    }}>
                     <Image source={{uri: post.image}} style={{width: 250, height: 208, borderRadius: 10, opacity:1}}/>
+                    </TouchableOpacity>
                     <Text style={styles.words}>{post.content}</Text>
-                    <Text style={styles.words}>Rating: {post.rating}</Text>
+                    <Text style={styles.words}>Rating: {post.rating}/5</Text>
                     <Text></Text>
                     <Text></Text>
                     <Text></Text>
@@ -54,9 +59,6 @@ class Memberarea extends Component{
                     <Text></Text>
                 </View>
             ))}
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Map'})} style={styles.lowRight} >
-                <Text style={styles.buttonText}>Map</Text>
-            </TouchableOpacity>
             </ScrollView>
             <View style={{height: 50, backgroundColor: 'steelblue'}} >
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >
@@ -90,6 +92,9 @@ const mapDispatch = (dispatch) => {
         },
         setBar(bar) {
             dispatch(setSelectedBar(bar))
+        },
+        setPost(post) {
+            dispatch(setCurrentPost(post))
         }
     }
 }

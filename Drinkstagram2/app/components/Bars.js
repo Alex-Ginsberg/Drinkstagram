@@ -37,8 +37,8 @@ class Bars extends Component{
             <Text></Text>
             <Text></Text>
             <Text></Text>
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.lowRight} >
-                <Text style={styles.buttonText}>Don't see what you're looking for? Be the first to post for a bar!</Text>
+            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Map'})} style={styles.buttonContainer} >
+                <Text style={styles.buttonText}>Map</Text>
             </TouchableOpacity>
             </ScrollView>
             <View style={{height: 50, backgroundColor: 'steelblue'}} >
