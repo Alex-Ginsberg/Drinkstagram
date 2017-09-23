@@ -13,5 +13,18 @@ router.get('/', function(req, res, next) {
     .catch(next)
 });
 
+router.get('/:id', (req, res, next) => {
+  Comment.findAll({
+    where: {
+      postId: req.params.id
+    },
+    include: [{all: true}]
+  })
+    .then(comments => {
+      res.json(comments)
+    })
+    .catch(next)
+})
+
 
 module.exports = router;
