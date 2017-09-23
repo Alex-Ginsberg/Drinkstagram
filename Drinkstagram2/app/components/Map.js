@@ -41,16 +41,16 @@ class Map extends Component{
         <MapView
           style={styles.map}
           region={{
-            latitude: latitude,
-            longitude: longitude,
+            latitude: 40.7051,
+            longitude: -74.0092,
             latitudeDelta: 0.015,
             longitudeDelta: 0.0121,
           }}
         >
         <MapView.Marker
-            coordinate={{latitude, longitude}}
+            coordinate={{latitude: 40.7051, longitude: -74.0092}}
             title={'You!'}
-            description={latitude + ''}
+            description={'Current Location'}
             image={'https://d30y9cdsu7xlg0.cloudfront.net/png/25719-200.png'}
         />
         {this.props.locations.map(location => (

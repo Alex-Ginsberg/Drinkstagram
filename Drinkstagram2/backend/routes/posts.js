@@ -24,7 +24,15 @@ router.post('/', (req, res, next) => {
     locationId: req.body.locationId,
     name: req.body.name
   })
-  .then(post => res.json(post))
+  .then(post => {
+    Post.findOne({
+      where: {
+        id: post.id
+      },
+      include: [{all: true}]
+    })
+    .then(fullPost => res.json(fullPost))
+  })
   .catch(next)
 })
 
