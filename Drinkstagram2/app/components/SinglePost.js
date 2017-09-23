@@ -2,16 +2,21 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, ScrollView} from 'react-native'
-import {setSelectedBar, fetchComments} from '../store'
+import {setSelectedBar, fetchComments, setCommentText, postComment} from '../store'
 
 
 class SinglePost extends Component{
     constructor() {
         super()
+        this.postComment = this.postComment.bind(this)
     }
 
     componentDidMount() {
         this.props.getCurrentComments(this.props.currentPost.id)
+    }
+
+    postComment() {
+        this.props.postComment(this.props.commentText, this.props.user.id, this.props.currentPost.id)
     }
 
   render() {
@@ -39,10 +44,29 @@ class SinglePost extends Component{
                 <Text style={styles.words}>{post.content}</Text>
                 <Text style={styles.words}>{post.rating}</Text>
             </View>
-            <View>
+            <View style={styles.postContainer}>
                 {this.props.currentComments.map(comment => (
-                    <Text key={comment.id}>{comment.content}</Text>
+                    <View key={comment.id}>
+                        <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                            <Image source={{uri: comment.user.profilePic}} style={{width: 25, height: 25, borderRadius: 1000}}/>
+                            <Text style={styles.commentName}>{comment.user.username}</Text>
+                        </View>
+                        <Text style={styles.words}>{comment.content}</Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                    </View>
                 ))}
+            </View>
+            <View style={styles.inputContainer}>
+                <TextInput underlineColorAndroid='transparent' style={styles.input}
+                         onChangeText={text => this.props.setCommentText(text)}   
+                         value={this.props.commentText} placeholder="Leave a comment...">
+                </TextInput>
+                <TouchableOpacity onPress={this.postComment} style={styles.buttonContainer}>
+                            <Text style={styles.buttonText}>POST</Text>
+                </TouchableOpacity>
             </View>
           </ScrollView>
           <View style={{height: 50, backgroundColor: 'steelblue'}} >
@@ -65,7 +89,9 @@ class SinglePost extends Component{
 const mapState = (state) => {
     return {
         currentPost: state.currentPost,
-        currentComments: state.currentComments
+        currentComments: state.currentComments,
+        commentText: state.commentText,
+        user: state.user
     }
 }
 
@@ -76,7 +102,14 @@ const mapDispatch = (dispatch) => {
         },
         getCurrentComments(id) {
             dispatch(fetchComments(id))
+        },
+        setCommentText(text) {
+            dispatch(setCommentText(text))
+        },
+        postComment(content, userId, postId) {
+            dispatch(postComment(content, userId, postId))
         }
+
     }
 }
 
@@ -93,6 +126,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     name: {
+        color: 'black',
+        fontSize: 25,
+        fontStyle: 'italic',
+        fontWeight: 'bold', 
+    },
+    commentName: {
         color: 'black',
         fontSize: 25,
         fontStyle: 'italic',

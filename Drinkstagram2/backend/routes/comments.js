@@ -26,5 +26,23 @@ router.get('/:id', (req, res, next) => {
     .catch(next)
 })
 
+router.post('/', (req, res, next) => {
+  Comment.create({
+    content: req.body.content,
+    postId: req.body.postId,
+    userId: req.body.userId
+  })
+    .then(comment => {
+      Comment.findOne({
+        where: {
+          id: comment.id
+        },
+        include: [{all: true}]
+      })
+      .then(fullComment => res.json(fullComment))
+    })
+    .catch(next)
+})
+
 
 module.exports = router;
