@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Picker, ScrollView} from 'react-native'
 import NavigationBar from 'react-native-navigation-bar'
-import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, setSelectedBar, setCurrentPost} from '../store'
+import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, setSelectedBar, setCurrentPost, fetchFollowing} from '../store'
 import Navbar from './Navbar'
 
 
@@ -15,13 +15,18 @@ class News extends Component{
 
     componentDidMount() {
         this.props.getPosts()
+        this.props.getFollowing(this.props.user.id)
     }
 
 
     
 
   render() {
-
+    const following = []
+    for (var i = 0; i < this.props.following.length; i++) {
+        following.push(this.props.following[i].followerId)
+    }
+    const posts = this.props.posts.filter(post => (following.includes(post.user.id) || post.user.id === this.props.user.id))
     return(
         <View style={{
             flex: 1,
@@ -35,7 +40,7 @@ class News extends Component{
         <TouchableOpacity onPress={() => this.props.navigator.push({id: 'AllUsers'})} style={styles.buttonContainer} >
                 <Text style={styles.buttonText}>Find more people to follow!</Text>
             </TouchableOpacity>
-            {this.props.posts.slice(0).reverse().map(post => (
+            {posts.slice(0).reverse().map(post => (
                 <View key={post.id} style={styles.postContainer}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                     <Image source={{uri: post.user.profilePic}} style={{width: 50, height: 50, borderRadius: 1000}}/>
@@ -86,6 +91,7 @@ const mapState = (state) => {
         currentRating: state.currentRating,
         currentContent: state.currentContent,
         image: state.image,
+        following: state.following
     }
 }
 
@@ -111,6 +117,9 @@ const mapDispatch = (dispatch) => {
         },
         setPost(post) {
             dispatch(setCurrentPost(post))
+        },
+        getFollowing(id) {
+            dispatch(fetchFollowing(id))
         }
     }
 }
