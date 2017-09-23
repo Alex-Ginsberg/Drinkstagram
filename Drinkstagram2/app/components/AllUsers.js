@@ -1,26 +1,36 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Picker, ScrollView} from 'react-native'
-import NavigationBar from 'react-native-navigation-bar'
-import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, setSelectedBar, setCurrentPost} from '../store'
-import Navbar from './Navbar'
+import {fetchUsers, fetchFollowing} from '../store'
 
 
 
-class News extends Component{
+class AllUsers extends Component{
     constructor() {
         super()
+        this.followUser = this.followUser.bind(this)
     }
 
     componentDidMount() {
-        this.props.getPosts()
+        this.props.getUsers()
+        console.log('GETTING FOLLOW FOR ', this.props.user.id)
+        this.props.getFollowing(this.props.user.id)
     }
 
+    followUser() {
 
+    }
     
 
   render() {
+    const filterUsers = this.props.allUsers.filter(user => user.id !== this.props.user.id)
+    const following = []
+    for (var i = 0; i < this.props.following.length; i++) {
+        following.push(this.props.following[i].followerId)
+    }
+    console.log('filterUSr: ', filterUsers)
+    const users = filterUsers.filter(user => !following.includes(user.id))
+    console.log('USERS: ', users)
 
     return(
         <View style={{
@@ -30,37 +40,19 @@ class News extends Component{
           }}>
           <View style={{height: 60, backgroundColor: 'powderblue'}}><Text style={styles.logo}>Drinkstagram</Text></View>
           <Image source={{uri: 'https://i.pinimg.com/originals/f5/58/a9/f558a9c7e36608a1f09fa3d628c9aee7.jpg'}} style={styles.backgroundImage}>
-          
         <ScrollView>
-        <TouchableOpacity onPress={() => this.props.navigator.push({id: 'AllUsers'})} style={styles.buttonContainer} >
-                <Text style={styles.buttonText}>Find more people to follow!</Text>
-            </TouchableOpacity>
-            {this.props.posts.slice(0).reverse().map(post => (
-                <View key={post.id} style={styles.postContainer}>
+            {users.map(user => (
+                <View key={user.id} style={styles.postContainer}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-                    <Image source={{uri: post.user.profilePic}} style={{width: 50, height: 50, borderRadius: 1000}}/>
-                    <Text style={styles.name}>{post.user.username}</Text>
+                    <Image source={{uri: user.profilePic}} style={{width: 100, height: 100, borderRadius: 1000}}/>
+                    <Text style={styles.name}>{user.username}</Text>
+                    <TouchableOpacity style={styles.follow} onPress={this.followUser}>
+                        <Text style={{color: 'white', fontSize: 15}}>Follow</Text>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={() => {
-                    this.props.setBar(post.location)
-                    this.props.navigator.push({id: 'SelectedBar'})}}>
-                    <Text style={styles.buttonText}>{post.name}, {post.location.name}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {
-                    this.props.setPost(post)
-                    this.props.navigator.push({id: 'SinglePost'})
-                }}>
-                <Image source={{uri: post.image}} style={{width: 250, height: 208, borderRadius: 10, opacity:1}}/>
-                </TouchableOpacity>
-                <Text style={styles.words}>{post.content}</Text>
-                <Text style={styles.words}>Rating: {post.rating}/5</Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
-                <Text></Text>
                 </View>
             ))}
-            </ScrollView>
+        </ScrollView>
             <View style={{height: 50, backgroundColor: 'steelblue'}} >
             <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >
                 <Text style={styles.buttonText}>News Feed</Text>
@@ -82,35 +74,21 @@ class News extends Component{
 const mapState = (state) => {
     return {
         user: state.user,
-        posts: state.posts,
-        currentRating: state.currentRating,
-        currentContent: state.currentContent,
-        image: state.image,
+        allUsers: state.allUsers,
+        following: state.following
     }
 }
 
 const mapDispatch = (dispatch) => {
     return {
-        getPosts() {
-            dispatch(fetchPosts())
+        getUsers() {
+            dispatch(fetchUsers())
         },
-        setCurrentContent(content){
-            dispatch(setContentText(content))
+        follow(userId, followerId) {
+            dispatch(postFollow(userId, followerId))
         },
-        setCurrentRating(num) {
-           dispatch(setCurrentRating(num))
-        },
-        sendPost(content, rating, userId, image) {
-            dispatch(postPost(content, rating, userId, image))
-        },
-        setImage (image) {
-            dispatch(setImage(image))
-        },
-        setBar(bar) {
-            dispatch(setSelectedBar(bar))
-        },
-        setPost(post) {
-            dispatch(setCurrentPost(post))
+        getFollowing(id) {
+            dispatch(fetchFollowing(id))
         }
     }
 }
@@ -203,6 +181,12 @@ const styles = StyleSheet.create({
         bottom: 0,
         right: 0,
     },
+    follow: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        backgroundColor: 'green'
+    },
     buttonText: {
         fontSize: 16, 
         fontWeight: 'bold',
@@ -210,5 +194,5 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(mapState, mapDispatch)(News)
+export default connect(mapState, mapDispatch)(AllUsers)
 

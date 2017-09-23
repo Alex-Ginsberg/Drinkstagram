@@ -10,6 +10,7 @@ import Bars from './app/components/Bars'
 import SelectedBar from './app/components/SelectedBar'
 import Map from './app/components/Map'
 import SinglePost from './app/components/SinglePost'
+import AllUsers from './app/components/AllUsers'
 import NavigationExperimental from 'react-native-deprecated-custom-components';
 const Navigator = NavigationExperimental.Navigator
 import {Provider} from 'react-redux'
@@ -51,6 +52,8 @@ export default class Drinkstagram2 extends Component{
         return(<Map navigator = {navigator} />)
       case 'SinglePost':
         return(<SinglePost navigator = {navigator} />)
+      case 'AllUsers':
+        return(<AllUsers navigator = {navigator} />)
     }
   }
 }

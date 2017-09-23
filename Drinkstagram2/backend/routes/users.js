@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../db/models/user')
+const {Friends} = require('../db/models')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -38,6 +39,16 @@ router.post('/signup', (req, res, next) => {
     profilePic
   })
   .then(user => res.send({success: true, message: user}))
+})
+
+router.get('/following/:id', (req, res, next) => {
+  Friends.findAll({
+    where: {
+      userId: req.params.id
+    },
+    attributes: ['followerId']
+  })
+  .then(following => res.json(following))
 })
 
 
