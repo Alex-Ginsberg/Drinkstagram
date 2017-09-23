@@ -2,7 +2,7 @@ const database = require('./db')
 const db = require('./db/models')
 const User = db.User
 const Post = db.Post
-const Location = db.Location
+const Comment = db.Comment
 
 let data = {
     userData: [
@@ -21,11 +21,20 @@ let data = {
         {name: 'Rum and Coke', image: 'https://cdn.liquor.com/wp-content/uploads/2015/10/19223251/b-20110420145340.jpg', content: 'This drink was terrible!', rating: 2, userId: 4, locationId: 1},
         {name: 'Martini', image: 'http://del.h-cdn.co/assets/cm/15/10/54f6856c07d4b_-_cuervo_especial_pomegranate_margarita_martini-xl-28464567.jpg', content: 'This drink was fantastic!', rating: 5, userId: 1, locationId: 1},
 
+    ],
+
+    commentData: [
+        {content: 'Nice pic!', postId: 1, userId: 1},
+        {content: 'Nice pic!', postId: 2, userId: 1},
+        {content: 'Nice pic!', postId: 3, userId: 3},
+        {content: 'Nice pic!', postId: 4, userId: 2},
+        {content: 'Nice pic!', postId: 5, userId: 4},
     ]
 }
 
 User.sync({force: true})
     .then(() => Post.sync({force: true}))
+    .then(() => Comment.sync({force: true}))
     .then(() => {
         console.log('Re-seeding the database')
         return Promise.all(
@@ -38,6 +47,13 @@ User.sync({force: true})
         return Promise.all(
             data['postData'].map(post => {
                 return Post.create(post)
+            })
+        )
+    })
+    .then(() => {
+        return Promise.all(
+            data['commentData'].map(comment => {
+                return Comment.create(comment)
             })
         )
     })
