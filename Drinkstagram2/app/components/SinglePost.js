@@ -17,6 +17,7 @@ class SinglePost extends Component{
 
     postComment() {
         this.props.postComment(this.props.commentText, this.props.user.id, this.props.currentPost.id)
+        this.props.setCommentText('')
     }
 
   render() {
