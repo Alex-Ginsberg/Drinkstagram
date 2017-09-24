@@ -75,8 +75,7 @@ class GooglePlacesInput extends Component{
       predefinedPlaces={[]}
 
       debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
-      renderLeftButton={() => <Text>Find your bar/restaurant!</Text>}
-      renderRightButton={() => <Text>Or use your current location!</Text>}
+
     />
   );
 }
