@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage} from 'react-native'
+import {StyleSheet, Text, View, Image, TextInput, TouchableOpacity} from 'react-native'
 import {setUserText, setPasswordText, postUser} from '../store'
 
 class Login extends Component{

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity} from 'react-native'
+import {StyleSheet, Text, View, Image, TextInput, TouchableOpacity} from 'react-native'
 import {setUserText, setPasswordText, setImage, makeUser} from '../store'
 import ImagePicker from 'react-native-image-picker';
 
@@ -45,7 +44,7 @@ class Signup extends Component{
     
 
   render() {
-    return(
+    return (
         <View style={styles.container}> 
             <Image source={require('../img/theboys.jpg')} style={styles.backgroundImage}>
                 <View style={styles.content}>

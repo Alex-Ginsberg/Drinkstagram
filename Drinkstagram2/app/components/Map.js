@@ -1,23 +1,10 @@
 import MapView from 'react-native-maps';
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, Picker, TouchableHighlight} from 'react-native'
-import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, fetchLocations, setCurrentLocation, setDrinkText, setCurrentLat, setCurrentLng} from '../store'
-import ImagePicker from 'react-native-image-picker';
-import Google from './Google'
-import Navbar from './Navbar'
+import {StyleSheet, View} from 'react-native'
+import {fetchLocations, setCurrentLat, setCurrentLng} from '../store'
 
 class Map extends Component{
-    constructor() {
-        super()
-        // this.state = {
-        //     latitude: 10,
-        //     longitude: 10,
-        //     error: null
-        // }
-    }
-
     componentDidMount() {
         console.log('Inside mount')
         this.props.getLocations()
@@ -34,9 +21,9 @@ class Map extends Component{
 
 
   render() {
-      const latitude = this.props.currentLat
-      const longitude = this.props.currentLng
-    return(
+    const latitude = this.props.currentLat
+    const longitude = this.props.currentLng
+    return (
         <View style ={styles.container}>
         <MapView
           style={styles.map}
@@ -58,9 +45,6 @@ class Map extends Component{
             coordinate={{latitude: location.lat, longitude: location.long}}
             title={location.name}
             description={location.description} />
-
-
-
         ))}
         </MapView>
       </View>

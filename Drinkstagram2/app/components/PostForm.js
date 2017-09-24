@@ -1,11 +1,8 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, Picker} from 'react-native'
-import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, fetchLocations, setCurrentLocation, setDrinkText} from '../store'
+import {StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Picker} from 'react-native'
+import {setContentText, setCurrentRating, postPost, setImage, fetchLocations, setCurrentLocation, setDrinkText} from '../store'
 import ImagePicker from 'react-native-image-picker';
-import Google from './Google'
-import Navbar from './Navbar'
 
 class PostForm extends Component{
     constructor() {
@@ -42,9 +39,6 @@ class PostForm extends Component{
             else {
             let source = { uri: response.uri };
             this.props.setImage(source)
-        
-            // You can also display the image using data:
-            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
         }
       });
     }
@@ -55,7 +49,7 @@ class PostForm extends Component{
 
 
   render() {
-    return(
+    return (
         <View style={styles.content}>
         <View style={styles.inputContainer}>
             <TextInput underlineColorAndroid='transparent' style={styles.input}
@@ -185,4 +179,3 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 })
-// AppRegistry.registerComponent('Login', () => Login)

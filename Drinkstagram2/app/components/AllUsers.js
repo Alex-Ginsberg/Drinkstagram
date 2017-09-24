@@ -1,18 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Picker, ScrollView} from 'react-native'
+import {StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native'
 import {fetchUsers, fetchFollowing, postFollow} from '../store'
 
-
-
 class AllUsers extends Component{
-    constructor() {
-        super()
-    }
 
     componentDidMount() {
         this.props.getUsers()
-        console.log('GETTING FOLLOW FOR ', this.props.user.id)
         this.props.getFollowing(this.props.user.id)
     }
 
@@ -26,40 +20,35 @@ class AllUsers extends Component{
     const users = filterUsers.filter(user => !following.includes(user.id))
 
     return (
-        <View style={{
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}>
+        <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between'}}>
           <View style={{height: 60, backgroundColor: 'powderblue'}}><Text style={styles.logo}>Drinkstagram</Text></View>
           <Image source={{uri: 'https://i.pinimg.com/originals/f5/58/a9/f558a9c7e36608a1f09fa3d628c9aee7.jpg'}} style={styles.backgroundImage}>
-        <ScrollView>
-            {users.map(user => (
-                <View key={user.id} style={styles.postContainer}>
-                <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-                    <Image source={{uri: user.profilePic}} style={{width: 100, height: 100, borderRadius: 1000}}/>
-                    <Text style={styles.name}>{user.username}</Text>
-                    <TouchableOpacity style={styles.follow} onPress={() => {
-                        this.props.follow(this.props.user.id, user.id)}}>
-                        <Text style={{color: 'white', fontSize: 15}}>Follow</Text>
-                    </TouchableOpacity>
-                </View>
-                </View>
-            ))}
-        </ScrollView>
+            <ScrollView>
+                {users.map(user => (
+                    <View key={user.id} style={styles.postContainer}>
+                    <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                        <Image source={{uri: user.profilePic}} style={{width: 100, height: 100, borderRadius: 1000}}/>
+                        <Text style={styles.name}>{user.username}</Text>
+                        <TouchableOpacity style={styles.follow} onPress={() => {
+                            this.props.follow(this.props.user.id, user.id)}}>
+                            <Text style={{color: 'white', fontSize: 15}}>Follow</Text>
+                        </TouchableOpacity>
+                    </View>
+                    </View>
+                ))}
+            </ScrollView>
             <View style={{height: 50, backgroundColor: 'steelblue'}} >
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >
-                <Text style={styles.buttonText}>News Feed</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.lowMiddle} >
-                <Text style={styles.buttonText}>Bars</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.lowRight} >
-                <Text style={styles.buttonText}>Post</Text>
-            </TouchableOpacity>
-            </View>
-       
-        </Image>
+                <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >
+                    <Text style={styles.buttonText}>News Feed</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.lowMiddle} >
+                    <Text style={styles.buttonText}>Bars</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.lowRight} >
+                    <Text style={styles.buttonText}>Post</Text>
+                </TouchableOpacity>
+            </View>      
+          </Image>
         </View>
     )
   }

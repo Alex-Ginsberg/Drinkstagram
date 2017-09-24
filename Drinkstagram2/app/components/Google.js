@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import { View, Image, Text } from 'react-native';
+import { Text } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import axios from 'axios'
 import {connect} from 'react-redux'
 import {postPost, postLocation} from '../store'
 
@@ -76,8 +75,8 @@ class GooglePlacesInput extends Component{
       predefinedPlaces={[]}
 
       debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
-      renderLeftButton={() => <Text>Left</Text>}
-      renderRightButton={() => <Text>Custom text after the inputg</Text>}
+      renderLeftButton={() => <Text>Find your bar/restaurant!</Text>}
+      renderRightButton={() => <Text>Or use your current location!</Text>}
     />
   );
 }

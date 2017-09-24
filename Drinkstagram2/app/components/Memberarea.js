@@ -1,17 +1,9 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
-import NavigationBar from 'react-native-navigation-bar'
-import Navbar from './Navbar'
+import {StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native'
 import {fetchPosts, setSelectedBar, setCurrentPost} from '../store'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-
 
 class Memberarea extends Component{
-    constructor() {
-        super()
-    }
 
     componentDidMount() {
         this.props.getPosts()
@@ -19,7 +11,7 @@ class Memberarea extends Component{
 
   render() {
     const filteredPosts = this.props.posts.filter(post => post.userId === this.props.user.id)
-    return(
+    return (
         <View style={{
             flex: 1,
             flexDirection: 'column',

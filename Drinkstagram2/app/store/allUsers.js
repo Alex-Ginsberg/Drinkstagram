@@ -5,15 +5,10 @@ import axios from 'axios'
  */
 const GET_USERS = 'GET_USERS'
 
-
-
-
 /**
  * ACTION CREATORS
  */
 export const getUsers = users => ({type: GET_USERS, users})
-
-
 
 /**
  * Thunk Middleware
