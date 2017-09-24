@@ -3,26 +3,23 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native'
 
  
 export default class Nav extends Component {
-    constructor() {
-        super()
-    }
 
-render() {
-    return(
-    <View>
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >
-                <Text style={styles.buttonText}>News Feed</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.lowMiddle} >
-                <Text style={styles.buttonText}>Bars</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.lowRight} >
-                <Text style={styles.buttonText}>Post</Text>
-            </TouchableOpacity>
-    </View>
-    )
-}
-}
+    render() {
+        return(
+        <View>
+                <TouchableOpacity onPress={() => this.props.navigator.push({id: 'News'})} style={styles.lowLeft} >
+                    <Text style={styles.buttonText}>News Feed</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigator.push({id: 'Bars'})} style={styles.lowMiddle} >
+                    <Text style={styles.buttonText}>Bars</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigator.push({id: 'PostForm'})} style={styles.lowRight} >
+                    <Text style={styles.buttonText}>Post</Text>
+                </TouchableOpacity>
+        </View>
+        )
+    }
+    }
 
 const styles = StyleSheet.create({
     container: {

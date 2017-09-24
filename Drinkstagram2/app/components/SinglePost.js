@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, ScrollView} from 'react-native'
+import {StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import {setSelectedBar, fetchComments, setCommentText, postComment} from '../store'
 
 
@@ -21,8 +20,8 @@ class SinglePost extends Component{
     }
 
   render() {
-      const post = this.props.currentPost
-    return(
+    const post = this.props.currentPost
+    return (
         <View style={{
             flex: 1,
             flexDirection: 'column',
@@ -216,4 +215,3 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 })
-// AppRegistry.registerComponent('Login', () => Login)

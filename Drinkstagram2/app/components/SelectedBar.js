@@ -1,13 +1,9 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, ScrollView} from 'react-native'
-import {setUserText, setPasswordText, postUser, fetchLocations, setSelectedBar, fetchPosts, setCurrentPost} from '../store'
+import {StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native'
+import {fetchPosts, setCurrentPost} from '../store'
 
 class SelectedBar extends Component{
-    constructor() {
-        super()
-    }
 
     componentDidMount() {
         this.props.getPosts()
@@ -20,7 +16,7 @@ class SelectedBar extends Component{
         totalRating += filteredPosts[i].rating
     }
     let avgRating = totalRating / filteredPosts.length
-    return(
+    return (
         <View style={{
             flex: 1,
             flexDirection: 'column',
@@ -212,4 +208,3 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 })
-// AppRegistry.registerComponent('Login', () => Login)

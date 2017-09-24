@@ -1,25 +1,13 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Picker, ScrollView} from 'react-native'
-import NavigationBar from 'react-native-navigation-bar'
+import {StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native'
 import {fetchPosts, setContentText, setCurrentRating, postPost, setImage, setSelectedBar, setCurrentPost, fetchFollowing} from '../store'
-import Navbar from './Navbar'
-
-
 
 class News extends Component{
-    constructor() {
-        super()
-    }
-
     componentDidMount() {
         this.props.getPosts()
         this.props.getFollowing(this.props.user.id)
     }
-
-
-    
 
   render() {
     const following = []
@@ -27,7 +15,7 @@ class News extends Component{
         following.push(this.props.following[i].followerId)
     }
     const posts = this.props.posts.filter(post => (following.includes(post.user.id) || post.user.id === this.props.user.id))
-    return(
+    return (
         <View style={{
             flex: 1,
             flexDirection: 'column',

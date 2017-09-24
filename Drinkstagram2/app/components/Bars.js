@@ -1,26 +1,18 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, AsynStorage, ScrollView} from 'react-native'
-import {setUserText, setPasswordText, postUser, fetchLocations, setSelectedBar} from '../store'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { fetchLocations, setSelectedBar} from '../store'
 
 
 class Bars extends Component{
-    constructor() {
-        super()
-    }
 
     componentDidMount() {
         this.props.getLocations()
     }
 
   render() {
-    return(
-        <View style={{
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}>
+    return (
+        <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between'}}>
           <View style={{height: 60, backgroundColor: 'powderblue'}}><Text style={styles.logo}>Drinkstagram</Text></View>
           <Image source={{uri: 'https://i.pinimg.com/originals/f5/58/a9/f558a9c7e36608a1f09fa3d628c9aee7.jpg'}} style={styles.backgroundImage}>
           <ScrollView>
@@ -149,4 +141,3 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 })
-// AppRegistry.registerComponent('Login', () => Login)
