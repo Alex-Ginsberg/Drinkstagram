@@ -43,6 +43,7 @@ class SinglePost extends Component{
                 <Image source={{uri: post.image}} style={{width: 250, height: 208, borderRadius: 10}}/>
                 <Text style={styles.words}>{post.content}</Text>
                 <Text style={styles.words}>Rating: {post.rating}/5</Text>
+                <Text style={styles.words}>Posted: {post.createdAt.slice(0, post.createdAt.indexOf('T'))}</Text>
             </View>
             <View style={styles.postContainer}>
                 {this.props.currentComments.map(comment => (
