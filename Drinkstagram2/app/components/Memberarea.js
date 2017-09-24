@@ -44,6 +44,7 @@ class Memberarea extends Component{
                     </TouchableOpacity>
                     <Text style={styles.words}>{post.content}</Text>
                     <Text style={styles.words}>Rating: {post.rating}/5</Text>
+                    <Text style={styles.words}>Posted: {post.createdAt.slice(0, post.createdAt.indexOf('T'))}</Text>
                     <Text></Text>
                     <Text></Text>
                     <Text></Text>
