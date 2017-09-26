@@ -28,14 +28,14 @@ class Map extends Component{
         <MapView
           style={styles.map}
           region={{
-            latitude: 40.7051,
-            longitude: -74.0092,
+            latitude: latitude,
+            longitude: longitude,
             latitudeDelta: 0.015,
             longitudeDelta: 0.0121,
           }}
         >
         <MapView.Marker
-            coordinate={{latitude: 40.7051, longitude: -74.0092}}
+            coordinate={{latitude: latitude, longitude: longitude}}
             title={'You!'}
             description={'Current Location'}
             image={'https://d30y9cdsu7xlg0.cloudfront.net/png/25719-200.png'}
