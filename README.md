@@ -1,5 +1,5 @@
 # Drinkstagram
-Drinkstagram is a mobile, social media app that creates a database of bar/restaurant ratings by using users' social media posts to create average ratings for the location the post was made.  
+**Drinkstagram is a mobile, social media app that creates a database of bar/restaurant ratings by using users' social media posts to create average ratings for the location the post was made.**
 
 ![login](https://github.com/Alex-Ginsberg/Drinkstagram/blob/master/Pics/Screen%20Shot%202017-11-13%20at%206.52.15%20PM.png)
 
