@@ -11,7 +11,8 @@ The user can then travel to their news feed to see the most recently made posts 
 PICTURE OF SINGLE POST
 
 The ratings are then used to compile an average rating for the bar/restaurant the drink was ordered from. By constantly including new posts into the average, the rating for each bar will get more accurate as more users post about the bar.
-PICTURE OF BAR
+
+![bar](https://github.com/Alex-Ginsberg/Drinkstagram/blob/master/Pics/Screen%20Shot%202017-11-13%20at%207.04.24%20PM.png)
 
 Users can find bars in their area via a Google Maps plugin, that allows users to find bars that other people have posted about in their area.
 
